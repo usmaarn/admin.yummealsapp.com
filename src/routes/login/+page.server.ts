@@ -1,22 +1,38 @@
-import { type Actions, fail, type RequestEvent } from '@sveltejs/kit';
+import { type Actions, fail, redirect, type RequestEvent } from '@sveltejs/kit';
 import { httpClient } from '$lib/http';
 import axios from 'axios';
 
-
 export const load = (event: RequestEvent) => {
 	return {}
+}
+
+
+type ErrorBag = {
+	errors: {[key: string]: string}
 }
 
 export const actions: Actions = {
 	default: async (event: RequestEvent) => {
 		const data = await event.request.formData();
 
-		const response = await httpClient.post("/auth/login", data)
-			.then(err => {
+		let errors:ErrorBag = null;
+
+		const response = await httpClient.post("/auth/login", Object.fromEntries(data))
+			.catch(err => {
 				if (axios.isAxiosError(err)) {
-					console.log(err?.response?.data);
+					errors = err?.response?.data as ErrorBag;
 				}else console.log(err)
 			});
-		console.log(response?.data);
+
+		if(errors) return fail(400, errors)
+
+		event.cookies.set("access_token", response?.data?.token, {
+			expires: new Date(response?.data?.expiresAt),
+			httpOnly: true,
+			secure: false,
+			path: "/"
+		});
+
+		redirect(302, "/")
 	}
 }
