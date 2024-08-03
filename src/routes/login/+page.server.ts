@@ -2,20 +2,15 @@ import { type Actions, fail, redirect, type RequestEvent } from '@sveltejs/kit';
 import { httpClient } from '$lib/http';
 import axios from 'axios';
 
-export const load = (event: RequestEvent) => {
-	return {}
-}
-
-
 type ErrorBag = {
-	errors: {[key: string]: string}
+	errors?: {[key: string]: string}
 }
 
 export const actions: Actions = {
 	default: async (event: RequestEvent) => {
 		const data = await event.request.formData();
 
-		let errors:ErrorBag = null;
+		let errors:ErrorBag|null = null;
 
 		const response = await httpClient.post("/auth/login", Object.fromEntries(data))
 			.catch(err => {
