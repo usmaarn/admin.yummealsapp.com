@@ -3,7 +3,7 @@
 		"id": 1,
 		"name": "Dashboard",
 		"language": "dashboard",
-		"url": "dashboard",
+		"url": "",
 		"icon": "lab lab-dashboard",
 		"status": 1,
 		"parent": 0,

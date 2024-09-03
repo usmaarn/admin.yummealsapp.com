@@ -12,5 +12,8 @@
 	<main class="db-main">
 		<Navbar {isOpen} onToggle={() => isOpen = !isOpen} />
 		<Sidebar {isOpen} />
+		<div class="w-[calc(100vw_-_300px)] ml-auto">
+			{@render props.children()}
+		</div>
 	</main>
 </div>

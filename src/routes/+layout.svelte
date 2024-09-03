@@ -16,6 +16,7 @@
 	<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 	<link rel="shortcut icon" href="/icon.png" type="image/x-icon">
 	<link rel="stylesheet" href="/fontawesome/fontawesome.css">
+	<link rel="stylesheet" href="/lab/lab.css">
 </svelte:head>
 
 {#if $navigating}
