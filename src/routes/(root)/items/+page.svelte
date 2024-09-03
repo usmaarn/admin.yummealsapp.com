@@ -114,9 +114,7 @@
 						<td class="db-table-body-td">{ item?.category_name }</td>
 						<td class="db-table-body-td">{ item.flat_price }</td>
 						<td class="db-table-body-td">
-								<span>
-										{item.status}
-								</span>
+								<span>{item.status}</span>
 						</td>
 						<td class="db-table-body-td hidden-print">
 							<div class="flex justify-start items-center sm:items-start sm:justify-start gap-1.5">
